@@ -48,7 +48,7 @@ orders = [
     {"order_id": "ORDER003", "items": {"SKU456": 10, "SKU101": 2}}
 ]
 
-for order in orders:
+""" for order in orders:
     order_id = order["order_id"]
     items = order["items"]
     total = 0
@@ -68,3 +68,11 @@ for order in orders:
         product["current_stock"] -= quantity # Actualizar el stock quitando lo que se ha llevado en ese pedido.
         total += product["price"] * quantity
     print(f"Order ID: {order_id} - Total: ${total:.2f} - Purchase Completed")
+ """
+
+def update_stock(product, units_sold):
+    current_stock = product["current_stock"]
+    final_stock = current_stock - units_sold
+    product["current_stock"] = final_stock
+    print(f'Your new stock for product {product["name"]} is {final_stock} units')
+    return product
