@@ -1,4 +1,4 @@
-# Gestión de categorías
+# Gestión de categorías...
 categories = [
     {"name": "Electronics", "description": "Devices and gadgets"},
     {"name": "Office", "description": "Office supplies and equipment"}
@@ -22,10 +22,29 @@ products = [
 # Gestión del inventario
 inventory = {product["sku"]: product for product in products}
 
+inventory = {}
+for product in products:
+    inventory[product["sku"]] = product
+
+# Ejemplo ejecucion:
+# Antes de iniciar:
+# {}
+# Tras primera vuelta:
+# {"SFU123": {"name": "Laptop", "sku": "...,}
+# Tras segunda vuelta:
+# {"SFU123": {"name": "Laptop", "sku": "...,
+# "SKU456": {"name": "Mouse", "sku": "SKU456", "price": 25,...
+# }
+# Tras tercera
+# {"SFU123": "Producto 1, con todos sus datos...",
+# "SKU456": "Producto 2..."
+# }
+
+
 # Procesar pedidos
 orders = [
-    {"order_id": "ORDER001", "items": {"SKU123": 2, "SKU456": 5}},
-    {"order_id": "ORDER002", "items": {"SKU789": 3, "SKU101": 1}},
+    {"order_id": "ORDER001", "items": {"SKU123": 7, "SKU456": 5}},
+    {"order_id": "ORDER002", "items": {"SKU123": 5, "SKU789": 3, "SKU101": 1}},
     {"order_id": "ORDER003", "items": {"SKU456": 10, "SKU101": 2}}
 ]
 
@@ -40,12 +59,17 @@ for order in orders:
             continue
         if product["current_stock"] < quantity:
             print(f"Error: Insufficient stock for {product['name']}. Available: {product['current_stock']}, Requested: {quantity}")
+            available_before_updating = product["current_stock"]
+            product["current_stock"] = 0 # Actualizar el stock quitando lo que se ha llevado en ese pedido.
+            total += product["price"] * product["current_stock"]
+            print(f"Pero le vendo {available_before_updating}")
             continue
         # Actualizar el stock
-        product["current_stock"] -= quantity
+        product["current_stock"] -= quantity # Actualizar el stock quitando lo que se ha llevado en ese pedido.
         total += product["price"] * quantity
     print(f"Order ID: {order_id} - Total: ${total:.2f} - Purchase Completed")
 
+    
 # Mostrar estado final del inventario
 print("\nInventory Report:\n")
 for product in inventory.values():
@@ -53,16 +77,6 @@ for product in inventory.values():
     tag_names = ", ".join([tag["name"] for tag in product["tags"]]) or "None"
     print(f"Product: {product['name']} (SKU: {product['sku']}) - Price: ${product['price']:.2f}, Stock: {product['current_stock']}, Categories: [{category_names}], Tags: [{tag_names}]")
 
-
-
-# Grupo 1: Una función que recibe un producto y una cantidad pedida, comprueba si hay suficiente stock y devuelve dos elementos: un boolean indicando si hay suficiente, y la cantidad máxima que se podría vender.
-# def check_stock_for_product(product, requested_units):
-
-# Grupo 2: Una función que recibe un objeto inventario y lo pinta "bonito", para usuarios (al usuario no le importa el sku, sino que le importa qué nombre tiene el producto, su precio...)
-# def show_inventory(inventory):
-
-# Grupo 3: una función para actualizar el current_stock de un producto
-# def update_stock(product, units_sol):
 
 # Grupo 4: una función para procesar una lista de orders
 def process_orders(orders):
@@ -85,5 +99,3 @@ def process_orders(orders):
 
     show_inventory(inventory)
 
-
-    
