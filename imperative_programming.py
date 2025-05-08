@@ -21,6 +21,8 @@ products = [
 
 # Gestión del inventario
 inventory = {product["sku"]: product for product in products}
+# print(50*'*')
+# print(inventory)
 
 inventory = {}
 for product in products:
@@ -76,6 +78,34 @@ for product in inventory.values():
     category_names = ", ".join([cat["name"] for cat in product["categories"]]) or "None"
     tag_names = ", ".join([tag["name"] for tag in product["tags"]]) or "None"
     print(f"Product: {product['name']} (SKU: {product['sku']}) - Price: ${product['price']:.2f}, Stock: {product['current_stock']}, Categories: [{category_names}], Tags: [{tag_names}]")
+
+
+
+def show_inventory(inventory):
+    for p in inventory.values():
+        name = p["name"]
+        price = p["price"]
+        current_stock = p["current_stock"]
+        categories = p["categories"]
+        tags = p["tags"]
+
+        #* Mostramos los 3 primeros valores
+        print(f'Nombre del producto: {name}')
+        print(f'Precio: {price}')
+        print(f'Stock actual: {current_stock}')
+
+        #* Mostramos las categorías
+        for c in categories:
+            print(f'Categoría: {c["name"]}')
+            print(f'Descripción: {c["description"]}')
+
+        #* Mostramos los Tags
+        tags_str = ', '.join([tag["name"] for tag in tags])
+        print(f'Tags: {tags_str}')
+
+        print('---------------------------------------')
+
+
 
 
 # Grupo 4: una función para procesar una lista de orders
