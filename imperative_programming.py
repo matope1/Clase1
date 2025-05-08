@@ -52,3 +52,38 @@ for product in inventory.values():
     category_names = ", ".join([cat["name"] for cat in product["categories"]]) or "None"
     tag_names = ", ".join([tag["name"] for tag in product["tags"]]) or "None"
     print(f"Product: {product['name']} (SKU: {product['sku']}) - Price: ${product['price']:.2f}, Stock: {product['current_stock']}, Categories: [{category_names}], Tags: [{tag_names}]")
+
+
+
+# Grupo 1: Una función que recibe un producto y una cantidad pedida, comprueba si hay suficiente stock y devuelve dos elementos: un boolean indicando si hay suficiente, y la cantidad máxima que se podría vender.
+# def check_stock_for_product(product, requested_units):
+
+# Grupo 2: Una función que recibe un objeto inventario y lo pinta "bonito", para usuarios (al usuario no le importa el sku, sino que le importa qué nombre tiene el producto, su precio...)
+# def show_inventory(inventory):
+
+# Grupo 3: una función para actualizar el current_stock de un producto
+# def update_stock(product, units_sol):
+
+# Grupo 4: una función para procesar una lista de orders
+def process_orders(orders):
+
+    for order in orders:
+        order_id = order["order_id"]
+        items = order["items"]
+        total = 0
+
+        print(order_id, items, total)
+
+        for sku, requested_units in items.items():
+            product = inventory.get(sku)
+
+            stock_available, units_sol = check_stock_for_product(product, requested_units)
+
+            if stock_available:
+
+                update_stock(product, units_sol)
+
+    show_inventory(inventory)
+
+
+    
