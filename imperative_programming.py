@@ -60,9 +60,14 @@ for product in inventory.values():
 def check_stock_for_product(product, requested_units):
     exist_stock = product["current_stock"] >= requested_units
     product_stock = product["current_stock"]
-    return exist_stock , product_stock
+
+    if exist_stock : 
+        return exist_stock, requested_units
+    else:
+        return exist_stock , product_stock
     
-# a , q = check_stock_for_product({"name": "Laptop", "sku": "SKU123", "price": 1200, "current_stock": 10}, 12)
-# print(a, q)
+a , q = check_stock_for_product({"name": "Laptop", "sku": "SKU123", "price": 1200, "current_stock": 10}, 7)
+print(a, q)
+
 
 
