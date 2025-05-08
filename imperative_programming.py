@@ -50,7 +50,7 @@ orders = [
     {"order_id": "ORDER003", "items": {"SKU456": 10, "SKU101": 2}}
 ]
 
-for order in orders:
+""" for order in orders:
     order_id = order["order_id"]
     items = order["items"]
     total = 0
@@ -71,13 +71,14 @@ for order in orders:
         total += product["price"] * quantity
     print(f"Order ID: {order_id} - Total: ${total:.2f} - Purchase Completed")
 
-    
-# Mostrar estado final del inventario
-print("\nInventory Report:\n")
-for product in inventory.values():
-    category_names = ", ".join([cat["name"] for cat in product["categories"]]) or "None"
-    tag_names = ", ".join([tag["name"] for tag in product["tags"]]) or "None"
-    print(f"Product: {product['name']} (SKU: {product['sku']}) - Price: ${product['price']:.2f}, Stock: {product['current_stock']}, Categories: [{category_names}], Tags: [{tag_names}]")
+ """
+
+def update_stock(product, units_sold):
+    current_stock = product["current_stock"]
+    final_stock = current_stock - units_sold
+    product["current_stock"] = final_stock
+    print(f'Your new stock for product {product["name"]} is {final_stock} units')
+    return product
 
 
 
