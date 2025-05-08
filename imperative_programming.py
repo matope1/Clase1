@@ -52,3 +52,17 @@ for product in inventory.values():
     category_names = ", ".join([cat["name"] for cat in product["categories"]]) or "None"
     tag_names = ", ".join([tag["name"] for tag in product["tags"]]) or "None"
     print(f"Product: {product['name']} (SKU: {product['sku']}) - Price: ${product['price']:.2f}, Stock: {product['current_stock']}, Categories: [{category_names}], Tags: [{tag_names}]")
+
+
+
+# Grupo 1: Una función que recibe un producto y una cantidad pedida, comprueba si hay suficiente stock y devuelve dos elementos: un boolean indicando si hay suficiente, y la cantidad máxima que se podría vender.
+
+def check_stock_for_product(product, requested_units):
+    exist_stock = product["current_stock"] >= requested_units
+    product_stock = product["current_stock"]
+    return exist_stock , product_stock
+    
+# a , q = check_stock_for_product({"name": "Laptop", "sku": "SKU123", "price": 1200, "current_stock": 10}, 12)
+# print(a, q)
+
+
