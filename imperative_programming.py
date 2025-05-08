@@ -1,4 +1,4 @@
-# Gestión de categorías
+# Gestión de categorías...
 categories = [
     {"name": "Electronics", "description": "Devices and gadgets"},
     {"name": "Office", "description": "Office supplies and equipment"}
