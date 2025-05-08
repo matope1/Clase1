@@ -68,6 +68,7 @@ orders = [
         product["current_stock"] -= quantity # Actualizar el stock quitando lo que se ha llevado en ese pedido.
         total += product["price"] * quantity
     print(f"Order ID: {order_id} - Total: ${total:.2f} - Purchase Completed")
+
  """
 
 def update_stock(product, units_sold):
@@ -76,3 +77,26 @@ def update_stock(product, units_sold):
     product["current_stock"] = final_stock
     print(f'Your new stock for product {product["name"]} is {final_stock} units')
     return product
+
+
+# Grupo 4: una función para procesar una lista de orders
+def process_orders(orders):
+
+    for order in orders:
+        order_id = order["order_id"]
+        items = order["items"]
+        total = 0
+
+        print(order_id, items, total)
+
+        for sku, requested_units in items.items():
+            product = inventory.get(sku)
+
+            stock_available, units_sol = check_stock_for_product(product, requested_units)
+
+            if stock_available:
+
+                update_stock(product, units_sol)
+
+    show_inventory(inventory)
+
